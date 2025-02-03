@@ -75,3 +75,40 @@ Quickstart
   # ENTRY POINT
   if __name__ == "__main__":
       main()
+
+
+**Example** - handle nested datasets :
+
+.. code:: python
+
+  # IMPORTS
+  from swiftserialize import YAMLSerializer
+
+
+  # MAIN DEFINITION
+  def main() -> None:
+
+      # [1] Prepare a file
+      file = fr"cache\test.yaml"
+      
+      # [2] Nested datasets can be conveniently "unpacked" into single key-value pairs
+      original:   dict = YAMLSerializer().load(file)
+      unpacked:   dict = YAMLSerializer().unpack(file)
+
+      # [3] Nesting operations can be done directly with Python dicts
+      flattened:  dict = YAMLSerializer().flatten(original)
+      folded:     dict = YAMLSerializer().fold(flattened)
+
+      print(original)
+      print(unpacked)
+      print(flattened)
+      print(folded)
+
+      # [4] Keys for flattened datasets are represented as tuples
+      value = flattened.get(('PARAMETER', 'SUB-PARAMETER'))
+      print(value)
+
+
+  # ENTRY POINT
+  if __name__ == "__main__":
+      main()
