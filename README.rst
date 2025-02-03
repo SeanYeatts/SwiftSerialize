@@ -45,7 +45,7 @@ Key ``import`` statements :
       # [2] Load structured data directly into a Python dict
       data: dict = YAMLSerializer().load(file_1)
 
-      # [3] Write directly to a different structured format
+      # [3] Convert to a different structured format
       JSONSerializer().save(data, file_2)
 
 
