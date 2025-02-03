@@ -137,5 +137,5 @@ Extract the contents of this module to a safe location. Open a new terminal and 
 
   py -m pip install "DIRECTORY_HERE\swiftserialize\dist\swiftserialize-1.0.0.tar.gz"
 
-- ``DIRECTORY_HERE`` should be replaced with the complete filepath to the folder where you saved the SwiftStorage module contents.
+- ``DIRECTORY_HERE`` should be replaced with the complete filepath to the folder where you saved the SwiftSerialize module contents.
 - Depending on the release of SwiftSerialize you've chosen, you may have to change ``1.0.0`` to reflect your specific version.
