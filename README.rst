@@ -112,3 +112,30 @@ Quickstart
   # ENTRY POINT
   if __name__ == "__main__":
       main()
+
+
+Installation
+------------
+**Prerequisites:**
+
+- Python 3.8 or higher is recommended
+- pip 24.0 or higher is recommended
+
+**For a pip installation:**
+
+Open a new Command Prompt. Run the following command:
+
+.. code:: sh
+
+  py -m pip install swiftserialize
+
+**For a local installation:**
+
+Extract the contents of this module to a safe location. Open a new terminal and navigate to the top level directory of your project. Run the following command:
+
+.. code:: sh
+
+  py -m pip install "DIRECTORY_HERE\swiftserialize\dist\swiftserialize-1.0.0.tar.gz"
+
+- ``DIRECTORY_HERE`` should be replaced with the complete filepath to the folder where you saved the SwiftStorage module contents.
+- Depending on the release of SwiftSerialize you've chosen, you may have to change ``1.0.0`` to reflect your specific version.
