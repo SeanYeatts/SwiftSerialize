@@ -15,7 +15,7 @@ Key Features
 Quickstart
 ----------
 
-**Example** - convert between two structured data formats :
+**Example** - conversion between two structured data formats :
 
 .. code:: python
 
@@ -42,7 +42,7 @@ Quickstart
       main()
 
 
-**Example** - introduce a middleman service :
+**Example** - introducing a middleman service :
 
 .. code:: python
 
@@ -77,7 +77,7 @@ Quickstart
       main()
 
 
-**Example** - handle nested datasets :
+**Example** - manipulating nested datasets :
 
 .. code:: python
 
