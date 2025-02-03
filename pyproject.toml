@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "swiftserialize"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
   { name="Sean Yeatts" },
 ]
@@ -16,6 +16,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: Microsoft :: Windows",
+]
+dependencies = [
+  "PyYAML>=6.0.0",
 ]
 
 [project.urls]
