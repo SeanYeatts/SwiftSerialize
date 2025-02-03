@@ -15,24 +15,12 @@ Key Features
 Quickstart
 ----------
 
-Key ``import`` statements :
-
-.. code:: python
-
-  from swiftserialize import JSONSerializer, YAMLSerializer
-
 **Example** - convert between two structured data formats :
 
 .. code:: python
 
   # IMPORTS
   from swiftserialize import JSONSerializer, YAMLSerializer
-
-
-  # MOCKUP FUNCTIONS
-  def encrypt(data: bytes) -> bytes:
-      """Placeholder encryption service."""
-      return data
 
 
   # MAIN DEFINITION
@@ -47,6 +35,41 @@ Key ``import`` statements :
 
       # [3] Convert to a different structured format
       JSONSerializer().save(data, file_2)
+
+
+  # ENTRY POINT
+  if __name__ == "__main__":
+      main()
+
+
+**Example** - introduce a middleman service :
+
+.. code:: python
+
+  # IMPORTS
+  from swiftserialize import YAMLSerializer
+
+
+  # MOCKUP FUNCTIONS
+  def encrypt(data: bytes) -> bytes:
+      """Placeholder encryption service."""
+      return data
+
+
+  # MAIN DEFINITION
+  def main() -> None:
+
+      # [1] Prepare some files
+      file_1 = fr"cache\test.yaml"
+      file_2 = fr"cache\test.bin"
+
+      # [2] Convert to binary for middleman services ( ex. encryption )
+      data        = YAMLSerializer().load(file_1)
+      encoded     = YAMLSerializer().encode(data)
+      encrypted   = encrypt(encoded)
+      
+      # [3] Serialize the modified data using the same serializer
+      YAMLSerializer().serialize(encrypted, file_2)
 
 
   # ENTRY POINT
