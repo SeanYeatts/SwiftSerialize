@@ -8,7 +8,7 @@ A simple way to read and write structured data. Easily extendable to support cus
 
 Key Features
 ------------
-- Easily read, write, and convert between structured data formats ( ex. json, yaml ).
+- Easily read, write, and convert between arbitrary data formats ( ex. json, yaml ).
 - Provides convenience methods for de-nesting / re-nesting hierarchical datasets.
 - Encode to binary for middleman services ( ex. data encryption ).
 
@@ -53,7 +53,7 @@ Quickstart
 
   # MOCKUP FUNCTIONS
   def encrypt(data: bytes) -> bytes:
-      """Placeholder encryption service."""
+      """Placeholder mock encryption service."""
       return data
 
 
@@ -106,7 +106,7 @@ Quickstart
       print(folded)
 
       # [4] Keys for flattened datasets are represented as tuples
-      value = flattened.get(('PARAMETER', 'SUB-PARAMETER'))
+      value = flattened.get(('KEY', 'SUB-KEY'))
       print(value)
 
 
