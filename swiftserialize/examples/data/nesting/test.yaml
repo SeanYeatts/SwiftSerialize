@@ -1,0 +1,14 @@
+KEY-1: value-1
+KEY-2:
+  KEY-2A: value-2A
+  KEY-2B: value-2B
+  KEY-2C: value-2C
+KEY-3:
+  KEY-3A:
+    KEY-3AA: value-3AA
+    KEY-3AB: value-3AB
+    KEY-3AC: value-3AC
+  KEY-3B:
+    KEY-3BA: value-3BA
+    KEY-3BB: value-3BB
+    KEY-3BC: value-3BC

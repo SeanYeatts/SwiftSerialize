@@ -1,0 +1,14 @@
+{
+    "key-1": {
+        "key-1A": "value-1A"
+    },
+    "key-2": {
+        "key-2A": "value-2A",
+        "key-2B": "value-2B",
+        "key-2C": "value-2C"
+    },
+    "key-3": {
+        "key-3A": "value-3A",
+        "key-3B": "value-3B"
+    }
+}
