@@ -8,9 +8,9 @@ A simple way to read and write structured data. Easily extendable to support cus
 
 Key Features
 ------------
-- Easily read, write, and convert between arbitrary data formats ( ex. json, yaml ).
+- Easily read, write, and convert between structured data formats ( ex. json, yaml ).
 - Provides convenience methods for de-nesting / re-nesting hierarchical datasets.
-- Encode to binary for middleman services ( ex. data encryption ).
+- Encode to binary for middleman services ( ex. encryption ).
 
 
 Quickstart
@@ -27,15 +27,25 @@ Quickstart
   # MAIN DEFINITION
   def main() -> None:
 
-      # [1] Prepare some files
-      file_1 = fr"cache\test.yaml"
-      file_2 = fr"cache\test.json"
+      # [1] Prepare some input / output files
+      file_in = "examples/data/translate/input.yaml"
+      file_out = "examples/data/translate/output.json"
 
-      # [2] Load structured data directly into a Python dict
-      data: dict = YAMLSerializer().load(file_1)
+      # [2] Read data from input file
+      with open(file_in, 'rb') as target:
+          data = target.read()
 
-      # [3] Convert to a different structured format
-      JSONSerializer().save(data, file_2)
+      # [3] Translate between structured data formats
+      decoded: dict = YAMLSerializer('utf-8').decode(data)
+      encoded: bytes = JSONSerializer('utf-8').encode(decoded)
+
+      # [4] Write data to output file
+      with open(file_out, "wb") as target:
+          target.write(encoded)
+
+      # [5] Visualize results
+      print(decoded)
+      print(encoded)
 
 
   # ENTRY POINT
@@ -60,17 +70,23 @@ Quickstart
   # MAIN DEFINITION
   def main() -> None:
 
-      # [1] Prepare some files
-      file_1 = fr"cache\test.yaml"
-      file_2 = fr"cache\test.bin"
+      # [1] Prepare some input / output files
+      file_in = "examples/data/middleman/input.yaml"
+      file_out = "examples/data/middleman/output.bin"
 
-      # [2] Convert to binary for middleman services ( ex. encryption )
-      data        = YAMLSerializer().load(file_1)
-      encoded     = YAMLSerializer().encode(data)
-      encrypted   = encrypt(encoded)
-      
-      # [3] Serialize the modified data using the same serializer
-      YAMLSerializer().serialize(encrypted, file_2)
+      # [2] Read data from input file
+      with open(file_in, 'rb') as target:
+          data = target.read()
+
+      # [3] Inject middleman services ( ex: encryption )
+      serializer  = YAMLSerializer('utf-8')
+      decoded     = serializer.decode(data)
+      encrypted   = encrypt(decoded)
+      encoded     = serializer.encode(encrypted)
+
+      # [4] Write data to output file
+      with open(file_out, "wb") as target:
+          target.write(encoded)
 
 
   # ENTRY POINT
@@ -89,24 +105,23 @@ Quickstart
   # MAIN DEFINITION
   def main() -> None:
 
-      # [1] Prepare a file
-      file = fr"cache\test.yaml"
-      
-      # [2] Nested datasets can be conveniently "unpacked" into single key-value pairs
-      original:   dict = YAMLSerializer().load(file)
-      unpacked:   dict = YAMLSerializer().unpack(file)
+      # [1] Read some data from an input file
+      with open("examples/data/nesting/test.yaml", "rb") as target:
+          data = target.read()
 
-      # [3] Nesting operations can be done directly with Python dicts
-      flattened:  dict = YAMLSerializer().flatten(original)
-      folded:     dict = YAMLSerializer().fold(flattened)
+      # [2] Conveniently unpack / pack nested datasets
+      serializer  = YAMLSerializer('utf-8')
+      original    = serializer.decode(data)
+      unpacked    = serializer.unpack(original)
+      packed      = serializer.pack(unpacked)
 
+      # [3] Visualize result
       print(original)
       print(unpacked)
-      print(flattened)
-      print(folded)
+      print(packed)
 
       # [4] Keys for flattened datasets are represented as tuples
-      value = flattened.get(('KEY', 'SUB-KEY'))
+      value = unpacked.get(('KEY-2', 'KEY-2A'))
       print(value)
 
 
