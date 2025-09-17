@@ -4,8 +4,8 @@ from __future__ import annotations
 
 
 # IMPORTS ( STANDARD )
-import pandas as pd
-from io import BytesIO
+import csv
+from io import StringIO
 
 # IMPORT ( PROJECT )
 from swiftserialize import TabularTextSerializer
@@ -17,13 +17,17 @@ class CSVSerializer(TabularTextSerializer):
     # OVERRIDDEN METHODS
     def encode(self, data: list[dict]) -> bytes:
         """Converts a Python list ( rows ) of dicts ( columns ) into a CSV byte string."""
-        buffer = BytesIO()
-        dataframe = pd.DataFrame(data)
-        dataframe.to_csv(buffer, index=False, encoding=self.encoding)
-        return buffer.getvalue()
+        buffer = StringIO()
+        fieldnames = data[0].keys()
+        writer = csv.DictWriter(buffer, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+        string = buffer.getvalue()
+        return string.encode(self.encoding)
 
     def decode(self, data: bytes) -> list[dict]:
         """Converts a CSV byte string into a Python list ( rows ) of dicts ( columns )."""
-        buffer = BytesIO(data)
-        dataframe = pd.read_csv(buffer, encoding=self.encoding)
-        return dataframe.to_dict(orient='records')
+        decoded = data.decode(self.encoding)
+        buffer = StringIO(decoded)
+        reader = csv.DictReader(buffer)
+        return [dict(row) for row in reader]
